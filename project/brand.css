@@ -1,0 +1,64 @@
+/* ============================================================
+   JIKO EXPLAINER VIDEO — brand foundations + video chrome
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@font-face {
+  font-family: 'Saans';
+  src: url('fonts/SaansRegular.otf') format('opentype'),
+       url('fonts/Saans-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+:root {
+  --jiko-navy:      #183085;
+  --jiko-navy-deep: #121844;
+  --jiko-ink:       #121844;
+  --jiko-blue:      #2340AD;
+  --jiko-blue-light:#54ADF8;
+  --jiko-indigo:    #1A2970;
+
+  --orb-cyan:    #2FD0E6;
+  --orb-sky:     #5C8DEF;
+  --orb-blue:    #3D6BE6;
+  --orb-violet:  #B9A6F2;
+  --orb-lavender:#CBB9F2;
+
+  --bg-white: #FFFFFF;
+  --bg-paper: #F1F1EB;
+  --fg-2: #4B5375;
+  --fg-3: #7C84A3;
+  --border: #E2E5F0;
+
+  --success: #1F8A5B;
+  --success-bg: #E6F4EC;
+  --warning: #C8881A;
+  --error:   #AD2323;
+  --error-bg: #FBE9E7;
+  --bg-tint: #EDF1FB;
+
+  --font-sans: 'Saans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #05070f; }
+
+/* Widow control is applied per-block: captions use `text-wrap: balance`
+   (inline) and wrapping body paragraphs use `.pretty` below. A global
+   `text-wrap`/`text-wrap-style` rule is avoided because, in this engine, an
+   inherited `text-wrap-style: pretty` forces descendants that set
+   `white-space: nowrap` to compute as `normal`, breaking nowrap chips/badges. */
+.pretty { text-wrap: pretty; }
+
+/* Tabular numerals everywhere numbers matter */
+.tnum { font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
