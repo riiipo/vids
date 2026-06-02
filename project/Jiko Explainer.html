@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jiko · Stablecoins, Made Profitable</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  #root { position: fixed; inset: 0; }
+</style>
+</head>
+<body>
+<div id="root" data-screen-label="00:00 Cover"></div>
+
+<template id="__bundler_thumbnail">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#121844"/><circle cx="50" cy="50" r="27" fill="none" stroke="#54ADF8" stroke-width="9"/></svg>
+</template>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="animations.jsx"></script>
+<script type="text/babel" src="lib.jsx"></script>
+<script type="text/babel" src="scenes-a.jsx"></script>
+<script type="text/babel" src="scenes-b.jsx"></script>
+<script type="text/babel" src="scenes-c.jsx"></script>
+<script type="text/babel" src="scenes-d.jsx"></script>
+
+<script type="text/babel" data-presets="react">
+const DURATION = 184;
+const SCENE_LABELS = [
+  [0,'Hook · $400B'],[11,'The shift'],[22,'Timeline'],[38,'Penalty'],
+  [48,'Zero return'],[57,'$450K cost'],[72,'The dilemma'],[84,'GENIUS Act'],
+  [94,'Jiko Pocket'],[107,'Direct ownership'],[119,'Circle flow'],
+  [136,'JikoNet ledger'],[158,'The payoff'],[172,'Close'],
+];
+
+function ScreenLabel() {
+  const time = useTime();
+  React.useEffect(() => {
+    const sec = Math.floor(time);
+    let name = SCENE_LABELS[0][1];
+    for (const [s, n] of SCENE_LABELS) { if (time >= s) name = n; }
+    const mm = String(Math.floor(sec/60)).padStart(2,'0');
+    const ss = String(sec%60).padStart(2,'0');
+    const el = document.getElementById('root');
+    if (el) el.dataset.screenLabel = `${mm}:${ss} ${name}`;
+  }, [Math.floor(time)]);
+  return null;
+}
+
+function SeekBridge() {
+  const { setTime, setPlaying } = useTimeline();
+  React.useEffect(() => {
+    window.__seek = (t) => { setPlaying(false); setTime(t); };
+    window.__play = () => setPlaying(true);
+  }, [setTime, setPlaying]);
+  return null;
+}
+
+function Scenes() {
+  return (
+    <React.Fragment>
+      <Scene1/><Scene2/><Scene3/><Scene4/>
+      <Scene5/><Scene6/><Scene7/><Scene8/>
+      <Scene9/><Scene10/><Scene11/>
+      <Scene12/><Scene13/><Scene14/>
+    </React.Fragment>
+  );
+}
+
+function App() {
+  return (
+    <Stage width={1920} height={1080} duration={DURATION} background="#FFFFFF" persistKey="jiko-explainer" fps={60}>
+      <BackgroundDirector/>
+      <Scenes/>
+      <Chrome darkRanges={DARK_RANGES}/>
+      <ScreenLabel/>
+      <SeekBridge/>
+    </Stage>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
